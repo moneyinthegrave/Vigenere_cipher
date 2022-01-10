@@ -5,61 +5,60 @@ using namespace std;
 
 int main() {
 	cout << "Enter your message: " << endl;
-	string text;
-	getline(cin, text);
-	cout << "Enter your key: " << endl;
-	string key;
-	getline(cin, key);
+	string input_message;
+	getline(cin, input_message);
+	cout << "Enter your encryption_key: " << endl;
+	string encryption_key;
+	getline(cin, encryption_key);
 
-	char *ntext = new char[text.size() - 1];
-	char *nkey = new char[key.size() - 1];
+	char *new_input_message = new char[input_message.size() - 1];
+	char *new_key = new char[encryption_key.size() - 1];
 
 	int k = 0;
-	for (int i = 0; i < text.size(); i++) {
-		nkey[i] = key[k];
+	for (int i = 0; i < input_message.size(); i++) {
+		new_key[i] = encryption_key[k];
 		k++;
-		if (k == key.size()) {
+		if (k == encryption_key.size()) {
 			k = 0;
 		}
 	}
-	for (int i = 0; i < text.size(); i++) {
-		if ((int(text[i]) + int(nkey[i])) < 256) {
-			ntext[i] = char((int(text[i]) + int(nkey[i])));
+	for (int i = 0; i < input_message.size(); i++) {
+		if ((int(input_message[i]) + int(new_key[i])) < 256) {
+			new_input_message[i] = char((int(input_message[i]) + int(new_key[i])));
 		} else {
-			ntext[i] = char((int(text[i]) + int(nkey[i])) - 256);
+			new_input_message[i] = char((int(input_message[i]) + int(new_key[i])) - 256);
 		}
 		k = 0;
 	}
 
 	cout << "Encrypted message :" << endl;
-	cout << ntext << endl;
+	cout << new_input_message << endl;
 	cout << "Enter the decryption key: " << endl;
-	string skey;
-	getline(cin, skey);
+	string decryption_key;
+	getline(cin, decryption_key);
 
 	cout << "Decrypted message: " << endl;
-	for (int i = 0; i < text.size(); i++) {
-		nkey[i] = skey[k];
+	for (int i = 0; i < input_message.size(); i++) {
+		new_key[i] = decryption_key[k];
 		k++;
-		if (k == key.size()) {
+		if (k == encryption_key.size()) {
 			k = 0;
 		}
 	}
-	for (int i = 0; i < text.size(); i++) {
-		cout << nkey[i];
+	for (int i = 0; i < input_message.size(); i++) {
+		cout << new_key[i];
 	}
 	cout << endl;
-	for (int i = 0; i < text.size(); i++) {
-		if ((int(text[i]) - int(nkey[i])) < 0) {
-			ntext[i] = char((int(ntext[i]) - int(nkey[i])));
+	for (int i = 0; i < input_message.size(); i++) {
+		if ((int(input_message[i]) - int(new_key[i])) < 0) {
+			new_input_message[i] = char((int(new_input_message[i]) - int(new_key[i])));
 		} else {
-			ntext[i] = char((int(ntext[i]) - int(nkey[i])) + 256);
+			new_input_message[i] = char((int(new_input_message[i]) - int(new_key[i])) + 256);
 		}
 	}
-	for (int i = 0; i < text.size(); i++) {
-		cout << ntext[i];
+	for (int i = 0; i < input_message.size(); i++) {
+		cout << new_input_message[i];
 	}
-	cout << endl;
 
 	return (0);
 }
