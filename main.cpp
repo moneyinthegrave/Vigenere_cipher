@@ -4,11 +4,10 @@
 using namespace std;
 
 int main() {
+	string input_message, encryption_key, decryption_key;
 	cout << "Enter your message: " << endl;
-	string input_message;
 	getline(cin, input_message);
 	cout << "Enter your encryption_key: " << endl;
-	string encryption_key;
 	getline(cin, encryption_key);
 
 	char *new_input_message = new char[input_message.size() - 1];
@@ -34,7 +33,6 @@ int main() {
 	cout << "Encrypted message :" << endl;
 	cout << new_input_message << endl;
 	cout << "Enter the decryption key: " << endl;
-	string decryption_key;
 	getline(cin, decryption_key);
 
 	cout << "Decrypted message: " << endl;
